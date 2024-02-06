@@ -4,7 +4,9 @@ import Header from './components/Header'
 import ContentPage from './components/ContentPage'
 import Nav from './components/Nav'
 import Layout from './components/Layout'
+import {Route, Routes} from 'react-router-dom'
 import Home from './components/Home'
+
 
 function App() {
   // Holder på alle states i dette parentComponent App.jsx -> kan brukes videre i childrenComponents. 
@@ -14,15 +16,13 @@ function App() {
   const [cart, setCart] = useState([])
 
   return (
-    <>
+    
       <Layout cart={cart} setCart={setCart} amount={amount} category={category}>
         <Routes> 
-          <Route path='/home' element={<Home />}/>
+          <Route path=":slug" element={<Home />}/> 
+          <Route path="/produkter/:id" element={<ContentPage amount={amount} setAmount={setAmount} category={category} setCart={setCart} cart={cart}/>}/>
         </Routes>
       </Layout>
-       {/* ContentPage benytter funksjoner fra Contentpage(?) */}
-       <ContentPage amount={amount} setAmount={setAmount} category={category} setCart={setCart} cart={cart}/>
-    </>
   )
 }
 export default App

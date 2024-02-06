@@ -1,6 +1,8 @@
+import { useParams } from "react-router-dom"
 
 export default function Home() {
-    return(
-        <h2>Hjem</h2>
+    const {slug} = useParams
+    return (
+        <h2>{slug}</h2>
     )
 }
