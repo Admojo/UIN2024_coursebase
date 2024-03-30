@@ -1,20 +1,23 @@
-import { useState } from "react"
-import  { Link, useParams } from 'react-router-dom'
+import { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
 
-export default function Nav() {
-    const {id} = useParams()
-    console.log(id)
-    
-    const [active, setActive] = useState()
-    const categoryList = ["City", "Ninjago","Castles and Knights", "Marine and Pirates", "Movie Characters" ]
-
-
+export default function Nav(){
+    const [active, setActive] = useState()    
+    const categoryList = ["City", "Ninjago", "Castles and Knights", "Marine and Pirates", "Movie Characters"]
+    useEffect(()=>{
+        console.log(active)
+    }, [active])
     return(
         <nav>
-        <ul>
-            {/* className er en funksjon som benytter .active definert i app.css, basert på hvilken category bruker trykker på i ui, pt. ahrdkodet til å være aktiv for "Ninjago" */}
-            {categoryList.map((item, index) => <li key={index+"cat"}><Link to={"produkter/"+item.replaceAll("", "-")} className={category === item ? "active" : null} href="#">{item}></Link></li>)}
-        </ul>
-    </nav>
+            <ul>
+                {categoryList.map((item, i) => 
+                <li key={i+"cat"}>
+                    <Link to={"/produkter/"+item.replaceAll(" ", "-")}
+                    //Lagt til en anonym funskjon som setter active staten til å ha verdien som er item i den den blir trykket på  
+                    onClick={()=> setActive(item)}
+                    className={active === item ? "active" : null}>{item}</Link>
+                </li>)}
+            </ul>
+        </nav>
     )
 }

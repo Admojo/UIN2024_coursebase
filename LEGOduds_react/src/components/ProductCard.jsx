@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react"
-
 export default function ProductCard({category, img, title, price, setAmount, prodid, setCart, cart}){
-  const [product, setProduct] = useState({
-    title: title,
-    price: price,
-    prodid: prodid
-   })
-  
-   useEffect(()=>{
-    countProducts()
-   },[cart])
+ const [product, setProduct] = useState({
+  title: title,
+  price: price,
+  prodid: prodid
+ })
 
-  // Håndterer oppdatering av antall items som ligger i handlekurv
-    const handleClick = ()=>{
+ useEffect(()=>{
+  countProducts()
+ },[cart])
+
+  const handleClick = ()=>{
     const exist = cart.find(item => item.prodid === product.prodid)
     setCart((prevCart) => 
     exist 
